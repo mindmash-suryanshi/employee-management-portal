@@ -1,0 +1,318 @@
+.login-page {
+  width: 100%;
+  height: 100vh;
+  min-height: 100vh;
+  display: flex;
+  overflow: hidden;
+  background-color: #f8fafc;
+}
+
+.login-container {
+  width: 100%;
+  height: 100vh;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: 42% 58%;
+  overflow: hidden;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+
+.login-brand {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  padding: 5rem;
+  background: linear-gradient(145deg, #2563eb 0%, #1d4ed8 55%, #1e40af 100%);
+  color: #ffffff;
+}
+
+.brand-content {
+  position: relative;
+  z-index: 2;
+  max-width: 32rem;
+}
+
+.brand-icon {
+  width: 4.5rem;
+  height: 4.5rem;
+  margin-bottom: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.18);
+}
+
+.brand-icon svg {
+  font-size: 2.5rem;
+}
+
+.brand-content h1 {
+  margin: 0;
+  font-size: 3rem;
+  line-height: 1.2;
+  font-weight: 700;
+  letter-spacing: -0.04em;
+}
+
+.brand-divider {
+  width: 4.5rem;
+  height: 0.1875rem;
+  margin: 2rem 0;
+  border-radius: 0.25rem;
+  background-color: #ffffff;
+}
+
+.brand-content p {
+  margin: 0;
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.88);
+}
+
+.city-silhouette {
+  position: absolute;
+  right: -2rem;
+  bottom: 0;
+  left: -2rem;
+  height: 45%;
+  opacity: 0.18;
+  display: flex;
+  align-items: flex-end;
+  gap: 0.75rem;
+  padding: 0 2rem;
+}
+
+.building {
+  flex: 1;
+  min-width: 2rem;
+  background-color: #ffffff;
+  border-radius: 0.125rem 0.125rem 0 0;
+}
+
+.building-one {
+  height: 45%;
+}
+
+.building-two {
+  height: 70%;
+}
+
+.building-three {
+  height: 55%;
+}
+
+.building-four {
+  height: 90%;
+}
+
+.building-five {
+  height: 65%;
+}
+
+.building-six {
+  height: 100%;
+}
+
+.login-form-section {
+  height: 100%;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem 6rem;
+  background-color: #ffffff;
+  box-sizing: border-box;
+}
+
+.login-form-container {
+  width: 100%;
+  max-width: 34rem;
+}
+
+.portal-branding {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 3.5rem;
+}
+
+.portal-icon {
+  width: 3.5rem;
+  height: 3.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  border-radius: 0.875rem;
+  background-color: #2563eb;
+  color: #ffffff;
+}
+
+.portal-icon svg {
+  font-size: 2rem;
+}
+
+.portal-branding h2 {
+  margin: 0;
+  color: #172554;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.portal-branding span {
+  display: block;
+  margin-top: 0.25rem;
+  color: #64748b;
+  font-size: 0.875rem;
+}
+
+.welcome-section {
+  margin-bottom: 2rem;
+}
+
+.welcome-section h1 {
+  margin: 0 0 0.625rem;
+  color: #172554;
+  font-size: 2.25rem;
+  font-weight: 700;
+}
+
+.welcome-section p {
+  margin: 0;
+  color: #64748b;
+  font-size: 1rem;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.login-form .MuiOutlinedInput-root {
+  border-radius: 0.625rem;
+}
+
+.login-form .MuiInputLabel-root {
+  font-size: 0.9375rem;
+}
+
+.login-form .MuiInputBase-input {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  font-size: 0.9375rem;
+}
+
+.login-form .MuiInputAdornment-root svg {
+  color: #94a3b8;
+}
+
+.login-submit {
+  min-height: 3.25rem !important;
+  margin-top: 0.5rem !important;
+  border-radius: 0.625rem !important;
+  background-color: #2563eb !important;
+  font-size: 1rem !important;
+  font-weight: 600 !important;
+  text-transform: none !important;
+  box-shadow: none !important;
+}
+
+.login-submit:hover {
+  background-color: #1d4ed8 !important;
+  box-shadow: none !important;
+}
+
+@media (max-width: 62.5rem) {
+  .login-container {
+    grid-template-columns: 40% 60%;
+  }
+
+  .login-brand {
+    padding: 3rem;
+  }
+
+  .brand-content h1 {
+    font-size: 2.25rem;
+  }
+
+  .login-form-section {
+    padding: 3rem;
+  }
+}
+
+@media (max-width: 50rem) {
+  .login-container {
+    height: 100vh;
+    grid-template-columns: 1fr;
+    overflow-y: auto;
+  }
+
+  .login-brand {
+    min-height: 18rem;
+    padding: 2.5rem;
+  }
+
+  .brand-content h1 {
+    font-size: 2rem;
+  }
+
+  .login-form-section {
+    min-height: 32rem;
+    padding: 2.5rem;
+  }
+}
+
+@media (max-width: 37.5rem) {
+  .login-page {
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  .login-container {
+    height: 100vh;
+  }
+
+  .login-brand {
+    min-height: 15rem;
+    padding: 2rem;
+  }
+
+  .brand-icon {
+    width: 3.5rem;
+    height: 3.5rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .brand-icon svg {
+    font-size: 2rem;
+  }
+
+  .brand-content h1 {
+    font-size: 1.75rem;
+  }
+
+  .brand-divider {
+    margin: 1.25rem 0;
+  }
+
+  .brand-content p {
+    font-size: 0.875rem;
+  }
+
+  .login-form-section {
+    min-height: 0;
+    padding: 2rem 1.5rem;
+  }
+
+  .portal-branding {
+    margin-bottom: 2rem;
+  }
+
+  .welcome-section h1 {
+    font-size: 1.75rem;
+  }
+}
