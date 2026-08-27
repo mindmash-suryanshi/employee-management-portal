@@ -1,7 +1,7 @@
 .main-layout {
   min-height: 100vh;
   display: flex;
-  background-color: #f8fafc;
+  background-color: var(--color-background);
 }
 
 .main-section {
@@ -14,4 +14,23 @@
 .main-content {
   flex: 1;
   padding: 1.5rem;
+  animation: contentFadeIn 0.5s ease-out;
+}
+
+@keyframes contentFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(0.75rem);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .main-content {
+    animation: none;
+  }
 }

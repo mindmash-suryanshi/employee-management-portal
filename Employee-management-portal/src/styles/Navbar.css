@@ -4,8 +4,8 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: #ffffff;
-  border-bottom: 0.0625rem solid #e5e7eb;
+  background-color: var(--color-white);
+  border-bottom: 0.0625rem solid var(--color-border);
 }
 
 .navbar-title {
@@ -21,15 +21,15 @@
 
 .navbar-user {
   font-size: 0.9375rem;
-  color: #374151;
+  color: var(--color-navbar-user);
 }
 
 .navbar-logout {
   padding: 0.625rem 1rem;
   border: none;
   border-radius: 0.5rem;
-  background-color: #ef4444;
-  color: #ffffff;
+  background-color: var(--color-danger);
+  color: var(--color-white);
   font-size: 0.875rem;
   cursor: pointer;
   transition: opacity 0.2s ease;
