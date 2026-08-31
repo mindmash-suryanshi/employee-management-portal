@@ -5,9 +5,15 @@
   --color-secondary: #3b82f6;
 
   --color-success: #22c55e;
+  --color-success-secondary: #dcfce7;
   --color-danger: #ef4444;
+  --color-danger-secondary: #fee2e2;
+  --color-warning: #f59e0b;
+  --color-warning-secondary: #fef3c7;
+  --color-neutral: #dbeafe;
 
   --color-background: #f8fafc;
+  --color-background-secondary: #eff6ff;
   --color-border: #e5e7eb;
   --color-white: #ffffff;
 
@@ -22,6 +28,8 @@
   --radius-md: 0.5rem;
   --radius-lg: 0.75rem;
   --radius-xl: 1rem;
+
+  --stat-box-shadow: rgba(15, 23, 42, 0.08);
 }
 
 * {
