@@ -1,4 +1,5 @@
 import { useState } from "react";
+
 import {
   Badge,
   IconButton,
@@ -16,37 +17,28 @@ import {
   DescriptionOutlined,
 } from "@mui/icons-material";
 
+import { notificationData } from "../utils/mockData/notificationData";
+
 import "../styles/NotificationMenu.css";
 
 const NotificationMenu = () => {
   const [anchorEl, setAnchorEl] = useState(null);
 
-  const notifications = [
-    {
-      id: 1,
-      title: "Leave request submitted",
-      message: "Michael Williams submitted a leave request.",
-      time: "10 minutes ago",
-      icon: <EventNoteOutlined />,
-    },
-    {
-      id: 2,
-      title: "New employee added",
-      message: "Emily Johnson was added to the team.",
-      time: "1 hour ago",
-      icon: <PersonAddOutlined />,
-    },
-    {
-      id: 3,
-      title: "Timesheet pending",
-      message: "James Davis has a pending timesheet.",
-      time: "2 hours ago",
-      icon: <DescriptionOutlined />,
-    },
-  ];
+  const [notifications, setNotifications] = useState(notificationData);
+
+  const unreadCount = notifications.filter(
+    (notification) => !notification.read,
+  ).length;
 
   const handleOpen = (event) => {
     setAnchorEl(event.currentTarget);
+
+    setNotifications((currentNotifications) =>
+      currentNotifications.map((notification) => ({
+        ...notification,
+        read: true,
+      })),
+    );
   };
 
   const handleClose = () => {
@@ -54,6 +46,22 @@ const NotificationMenu = () => {
   };
 
   const isOpen = Boolean(anchorEl);
+
+  const getNotificationIcon = (type) => {
+    switch (type) {
+      case "leave":
+        return <EventNoteOutlined />;
+
+      case "employee":
+        return <PersonAddOutlined />;
+
+      case "timesheet":
+        return <DescriptionOutlined />;
+
+      default:
+        return <NotificationsNoneOutlined />;
+    }
+  };
 
   return (
     <>
@@ -66,9 +74,10 @@ const NotificationMenu = () => {
         aria-expanded={isOpen ? "true" : undefined}
       >
         <Badge
-          badgeContent={notifications.length}
+          badgeContent={unreadCount}
           color="error"
           overlap="circular"
+          invisible={unreadCount === 0}
         >
           <NotificationsNoneOutlined />
         </Badge>
@@ -97,7 +106,7 @@ const NotificationMenu = () => {
           <Typography className="notification-title">Notifications</Typography>
 
           <Typography className="notification-count">
-            {notifications.length} new
+            {unreadCount > 0 ? `${unreadCount} new` : "All caught up"}
           </Typography>
         </Box>
 
@@ -109,7 +118,9 @@ const NotificationMenu = () => {
             className="notification-item"
             onClick={handleClose}
           >
-            <div className="notification-icon">{notification.icon}</div>
+            <div className="notification-icon">
+              {getNotificationIcon(notification.type)}
+            </div>
 
             <div className="notification-content">
               <Typography className="notification-item-title">
@@ -125,7 +136,7 @@ const NotificationMenu = () => {
               </Typography>
             </div>
 
-            <span className="notification-unread" />
+            {!notification.read && <span className="notification-unread" />}
           </MenuItem>
         ))}
       </Menu>
