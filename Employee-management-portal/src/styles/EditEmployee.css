@@ -126,9 +126,9 @@
 .edit-employee-error {
   margin: 0 0 1rem;
   padding: 0.75rem 1rem;
-  border: 0.0625rem solid #fecaca;
+  border: 0.0625rem solid var(--color-danger-secondary);
   border-radius: 0.4375rem;
-  background-color: #fef2f2;
+  background-color: var(--color-background);
   color: var(--color-danger);
   font-size: 0.8125rem;
 }

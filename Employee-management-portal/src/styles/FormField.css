@@ -36,7 +36,7 @@
 .form-field input:focus,
 .form-field select:focus {
   border-color: var(--color-primary);
-  box-shadow: 0 0 0 0.1875rem rgba(37, 99, 235, 0.1);
+  box-shadow: 0 0 0 0.1875rem var(--input-box-shadow);
 }
 
 .form-field select {
