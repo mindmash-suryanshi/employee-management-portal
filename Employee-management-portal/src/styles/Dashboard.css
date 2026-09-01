@@ -1,0 +1,241 @@
+.dashboard-page {
+  width: 100%;
+  animation: dashboardFadeIn 0.5s ease-out;
+}
+
+@keyframes dashboardFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(0.75rem);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.dashboard-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.dashboard-title {
+  margin: 0;
+  color: var(--color-text-primary);
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.dashboard-subtitle {
+  margin: 0.5rem 0 0;
+  color: var(--color-text-secondary);
+  font-size: 0.93rem;
+}
+
+.dashboard-date {
+  padding: 0.75rem 1rem;
+  border: 0.06 rem solid var(--color-border);
+  border-radius: var(--radius-md);
+  background-color: var(--color-white);
+  color: var(--color-text-secondary);
+}
+
+.dashboard-stats {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.stat-card {
+  border: 0.06rem solid var(--color-border);
+  border-radius: var(--radius-lg) !important;
+  background-color: var(--color-white);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.stat-card:hover {
+  transform: translateY(-0.125rem);
+  box-shadow: 0 0.5rem 1.5rem var(--stat-box-shadow);
+}
+
+.stat-card .MuiCardContent-root {
+  padding: 1.25rem;
+}
+
+.stat-card-icon {
+  width: 2.75rem;
+  height: 2.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+  border-radius: 0.75rem;
+}
+
+.stat-card-icon svg {
+  font-size: 1.5rem;
+}
+
+.stat-card-icon-primary {
+  background-color: var(--color-neutral);
+  color: var(--color-primary);
+}
+
+.stat-card-icon-secondary {
+  background-color: var(--color-neutral);
+  color: var(--color-secondary);
+}
+
+.stat-card-icon-success {
+  background-color: var(--color-success-secondary);
+  color: var(--color-success);
+}
+
+.stat-card-icon-danger {
+  background-color: var(--color-danger-secondary);
+  color: var(--color-danger);
+}
+
+.stat-card-title {
+  margin-bottom: 0.3rem !important;
+  color: var(--color-text-secondary);
+}
+
+.stat-card-value {
+  color: var(--color-text-primary);
+  font-weight: 700 !important;
+}
+
+.dashboard-content {
+  width: 100%;
+}
+
+.activity-card {
+  border: 0.0625rem solid var(--color-border);
+  border-radius: var(--radius-lg) !important;
+  background-color: var(--color-white);
+}
+
+.activity-card .MuiCardContent-root {
+  padding: 1.5rem;
+}
+
+.activity-title {
+  margin-bottom: 1.5rem !important;
+  color: var(--color-text-primary);
+  font-weight: 700 !important;
+}
+
+.activity-card .MuiTableCell-root {
+  border-bottom: 0.0625rem solid var(--color-border);
+  color: var(--color-text-secondary);
+  font-size: 0.875rem;
+}
+
+.activity-card .MuiTableHead-root .MuiTableCell-root {
+  color: var(--color-text-primary);
+  font-weight: 600;
+  background-color: var(--color-background);
+}
+
+.activity-card .MuiTableBody-root .MuiTableRow:last-child .MuiTableCell-root {
+  border-bottom: none;
+}
+
+.stat-card-subtitle {
+  margin-top: 0.75rem !important;
+  color: var(--color-text-muted);
+  font-size: 0.75rem !important;
+}
+
+.stat-card-icon-warning {
+  background-color: var(--color-warning-secondary);
+  color: var(--color-warning);
+}
+
+.activity-name {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: var(--color-text-secondary);
+}
+
+.activity-icon {
+  width: 2rem;
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background-color: var(--color-background-secondary);
+  color: var(--color-primary);
+}
+
+.activity-icon svg {
+  font-size: 1.125rem;
+}
+
+.activity-status {
+  font-size: 0.75rem !important;
+  font-weight: 500 !important;
+  border-radius: 999px !important;
+}
+
+.activity-status-completed {
+  background-color: var(--color-success-secondary) !important;
+  color: var(--color-success) !important;
+}
+
+.activity-status-pending {
+  background-color: var(--color-warning-secondary) !important;
+  color: var(--color-danger) !important;
+}
+@media (max-width: 50rem) {
+  .activity-card {
+    overflow-x: auto;
+  }
+
+  .activity-card .MuiTable-root {
+    min-width: 40rem;
+  }
+}
+
+.stat-card-clickable {
+  color: inherit;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.stat-card-clickable:hover {
+  transform: translateY(-0.125rem);
+  box-shadow: 0 0.5rem 1.5rem var(--stat-box-shadow);
+}
+
+.stat-card-clickable:focus-visible {
+  outline: 0.125rem solid var(--color-primary);
+  outline-offset: 0.125rem;
+}
+
+@media (max-width: 75rem) {
+  .dashboard-stats {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 35.6rem) {
+  .dashboard-stats {
+    grid-template-columns: 1fr;
+  }
+
+  .dashboard-title {
+    font-size: 1.5rem;
+  }
+}
