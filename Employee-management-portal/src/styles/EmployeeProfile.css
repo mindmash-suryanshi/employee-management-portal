@@ -1,0 +1,147 @@
+.employee-profile-page {
+  width: 100%;
+  animation: employeeProfileFadeIn 0.4s ease-out;
+}
+
+.employee-profile-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  margin-bottom: 1.5rem;
+  color: var(--color-text-secondary);
+  font-size: 0.875rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition:
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.employee-profile-back svg {
+  font-size: 1.125rem;
+}
+
+.employee-profile-back:hover {
+  color: var(--color-primary);
+  transform: translateX(-0.125rem);
+}
+
+.employee-profile-hero {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  background-color: var(--color-white);
+  border: 0.0625rem solid var(--color-border);
+  border-radius: 0.75rem;
+}
+
+.employee-profile-avatar {
+  width: 4.5rem;
+  height: 4.5rem;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background-color: #dbeafe;
+  color: var(--color-primary);
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.employee-profile-hero-info h1 {
+  margin: 0;
+  color: var(--color-text-primary);
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.employee-profile-hero-info p {
+  margin: 0.25rem 0;
+  color: var(--color-text-secondary);
+  font-size: 0.875rem;
+}
+
+.employee-profile-hero-info span {
+  color: var(--color-text-secondary);
+  font-size: 0.75rem;
+}
+
+.employee-profile-card {
+  margin-bottom: 1.25rem;
+  padding: 1.5rem;
+  background-color: var(--color-white);
+  border: 0.0625rem solid var(--color-border);
+  border-radius: 0.75rem;
+}
+
+.employee-profile-card-header {
+  margin-bottom: 1.5rem;
+}
+
+.employee-profile-card-header h2 {
+  margin: 0;
+  color: var(--color-text-primary);
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.employee-profile-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.5rem 3rem;
+}
+
+.employee-profile-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+}
+
+.employee-profile-field span {
+  color: var(--color-text-secondary);
+  font-size: 0.75rem;
+}
+
+.employee-profile-field strong {
+  color: var(--color-text-primary);
+  font-size: 0.875rem;
+  font-weight: 500;
+  word-break: break-word;
+}
+
+@keyframes employeeProfileFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(0.5rem);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.employee-profile-actions {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+}
+
+@media (max-width: 700px) {
+  .employee-profile-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .employee-profile-hero {
+    padding: 1.25rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .employee-profile-page {
+    animation: none;
+  }
+}

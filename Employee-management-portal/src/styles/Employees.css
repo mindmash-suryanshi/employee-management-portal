@@ -1,0 +1,111 @@
+.employees-page {
+  width: 100%;
+}
+
+.employees-header {
+  margin-bottom: 1.75rem;
+}
+
+.employees-header h1 {
+  margin: 0;
+  color: var(--color-text-primary);
+  font-size: 1.75rem;
+  font-weight: 700;
+}
+
+.employees-header p {
+  margin: 0.375rem 0 0;
+  color: var(--color-text-secondary);
+  font-size: 0.875rem;
+}
+
+.employee-table-container {
+  width: 100%;
+  border: 0.0625rem solid var(--color-border);
+  border-radius: 0.75rem !important;
+  box-shadow: none !important;
+  overflow: hidden;
+}
+
+.employee-table-container thead {
+  background-color: var(--color-background);
+}
+
+.employee-table-container th {
+  padding: 1rem 1.25rem;
+  color: var(--color-text-primary);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.employee-table-container td {
+  padding: 1rem 1.25rem;
+  color: var(--color-text-secondary);
+  font-size: 0.875rem;
+  border-bottom: 0.0625rem solid var(--color-border);
+}
+
+.employee-table-container tbody tr {
+  transition: background-color 0.2s ease;
+}
+
+.employee-table-container tbody tr:hover {
+  background-color: var(--color-background);
+}
+
+.employee-table-container tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.employee-table-container th:first-child,
+.employee-table-container td:first-child {
+  width: 5rem;
+  white-space: nowrap;
+}
+
+.employee-table-container td:nth-child(2) {
+  width: 18%;
+  color: var(--color-text-primary);
+  font-weight: 500;
+}
+
+.employee-table-container td:nth-child(3) {
+  width: 32%;
+  white-space: nowrap;
+}
+
+.employee-table-container td:nth-child(4) {
+  width: 30%;
+}
+
+.employee-table-container th:last-child,
+.employee-table-container td:last-child {
+  width: 10rem;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.employee-table-container .MuiButton-root {
+  min-width: 7.5rem;
+  padding: 0.5rem 0.875rem;
+  border-radius: 0.4375rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: none;
+  white-space: nowrap;
+}
+
+.employee-stat-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+
+  margin-bottom: 1.5rem;
+}
+
+@media (max-width: 900px) {
+  .employee-stat-cards {
+    grid-template-columns: 1fr;
+  }
+}

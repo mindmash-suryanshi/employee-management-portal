@@ -11,3 +11,15 @@ export const fetchEmployees = async () => {
 
   return data.users;
 };
+
+export const fetchEmployeeById = async (id) => {
+  const response = await fetch(`${EMPLOYEE_URL}/${id}`);
+
+  if (!response.ok) {
+    throw new Error("Failed to fetch employee");
+  }
+
+  const data = await response.json();
+
+  return data;
+};
