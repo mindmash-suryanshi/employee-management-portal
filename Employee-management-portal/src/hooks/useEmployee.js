@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 
 import { fetchEmployeeById } from "../services/employeeService";
 
+import { getStoredEmployees } from "../utils/employeeStorage";
+
 const useEmployee = (id) => {
   const [employee, setEmployee] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -9,17 +11,26 @@ const useEmployee = (id) => {
 
   useEffect(() => {
     const loadEmployee = async () => {
-      console.log("Employee ID:", id);
-
       try {
-        const data = await fetchEmployeeById(id);
+        const storedEmployees = getStoredEmployees();
 
-        console.log("Employee received:", data);
+        if (storedEmployees) {
+          const storedEmployee = storedEmployees.find(
+            (employee) => employee.id === Number(id),
+          );
+
+          if (!storedEmployee) {
+            throw new Error("Employee not found");
+          }
+
+          setEmployee(storedEmployee);
+          return;
+        }
+
+        const data = await fetchEmployeeById(id);
 
         setEmployee(data);
       } catch (error) {
-        console.error("Employee fetch error:", error);
-
         setError(error.message);
       } finally {
         setLoading(false);
