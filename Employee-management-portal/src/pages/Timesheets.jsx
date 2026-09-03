@@ -2,6 +2,12 @@ import { useState } from "react";
 
 import useTimesheets from "../hooks/useTimesheets";
 import TimesheetTable from "../components/Timesheets/TimesheetTable";
+import TimesheetForm from "../components/Timesheets/TimesheetForm";
+
+import {
+  updateTimesheetStatus,
+  addTimesheet,
+} from "../utils/timesheetsStorage";
 
 import {
   AccessTimeOutlined,
@@ -11,11 +17,21 @@ import {
 } from "@mui/icons-material";
 
 import "../styles/Timesheet.css";
+import "../styles/TimesheetForm.css";
 
 const Timesheets = () => {
-  const { timesheets, loading, error } = useTimesheets();
+  const { timesheets, setTimesheets, loading, error } = useTimesheets();
 
   const [selectedStatus, setSelectedStatus] = useState("All");
+
+  const [showForm, setShowForm] = useState(false);
+
+  const [formData, setFormData] = useState({
+    employeeId: "",
+    week: "",
+  });
+
+  const [saving, setSaving] = useState(false);
 
   const totalTimesheets = timesheets.length;
 
@@ -37,11 +53,57 @@ const Timesheets = () => {
       : timesheets.filter((timesheet) => timesheet.status === selectedStatus);
 
   const handleApprove = (timesheetId) => {
-    console.log("Approve timesheet:", timesheetId);
+    const updatedTimesheets = updateTimesheetStatus(timesheetId, "Approved");
+
+    setTimesheets(updatedTimesheets);
   };
 
   const handleReject = (timesheetId) => {
-    console.log("Reject timesheet:", timesheetId);
+    const updatedTimesheets = updateTimesheetStatus(timesheetId, "Rejected");
+
+    setTimesheets(updatedTimesheets);
+  };
+
+  const handleFormChange = (event) => {
+    const { name, value } = event.target;
+
+    setFormData((previousData) => ({
+      ...previousData,
+      [name]: value,
+    }));
+  };
+
+  const handleAddTimesheet = (event) => {
+    event.preventDefault();
+
+    setSaving(true);
+
+    const newTimesheet = {
+      employeeId: Number(formData.employeeId),
+      week: formData.week,
+      status: "Pending",
+    };
+
+    const updatedTimesheets = addTimesheet(newTimesheet);
+
+    setTimesheets(updatedTimesheets);
+
+    setFormData({
+      employeeId: "",
+      week: "",
+    });
+
+    setSaving(false);
+    setShowForm(false);
+  };
+
+  const handleCancelForm = () => {
+    setFormData({
+      employeeId: "",
+      week: "",
+    });
+
+    setShowForm(false);
   };
 
   if (loading) {
@@ -68,11 +130,25 @@ const Timesheets = () => {
           <p>Manage employee timesheets and approvals.</p>
         </div>
 
-        <button type="button" className="add-timesheet-button">
+        <button
+          type="button"
+          className="add-timesheet-button"
+          onClick={() => setShowForm(true)}
+        >
           <AccessTimeOutlined />
           Add Timesheet
         </button>
       </div>
+
+      {showForm && (
+        <TimesheetForm
+          formData={formData}
+          onChange={handleFormChange}
+          onSubmit={handleAddTimesheet}
+          onCancel={handleCancelForm}
+          saving={saving}
+        />
+      )}
 
       <div className="timesheet-stat-cards">
         <div className="timesheet-stat-card">

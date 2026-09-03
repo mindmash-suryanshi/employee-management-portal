@@ -16,6 +16,7 @@
   --color-background-secondary: #eff6ff;
   --color-border: #e5e7eb;
   --color-white: #ffffff;
+  --color-black: #333;
 
   --color-text-primary: #172554;
   --color-text-secondary: #64748b;
@@ -23,6 +24,8 @@
 
   --color-brand-icon: rgba(255, 255, 255, 0.18);
   --color-navbar-user: #374151;
+
+  --search-bar-text: #777;
 
   --radius-sm: 0.375rem;
   --radius-md: 0.5rem;

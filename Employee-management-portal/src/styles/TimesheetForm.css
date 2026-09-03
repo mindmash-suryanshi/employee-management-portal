@@ -1,0 +1,73 @@
+.timesheet-form {
+  width: 100%;
+}
+
+.timesheet-form-section {
+  padding: 1.5rem;
+  border: 0.0625rem solid var(--color-border);
+  border-radius: 0.75rem;
+  background: #fff;
+}
+
+.timesheet-form-section h2 {
+  margin: 0 0 1.25rem;
+  color: var(--color-text-primary);
+  font-size: 1.125rem;
+  font-weight: 600;
+}
+
+.timesheet-form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+
+.timesheet-form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  margin-top: 1.25rem;
+}
+
+.timesheet-form-actions button {
+  padding: 0.65rem 1rem;
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.timesheet-form-cancel {
+  border: 0.0625rem solid var(--color-border);
+  background: #fff;
+  color: var(--color-text-primary);
+}
+
+.timesheet-form-save {
+  border: none;
+  background: var(--color-primary);
+  color: #fff;
+}
+
+.timesheet-form-save:hover {
+  opacity: 0.9;
+}
+
+.timesheet-form-save:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+@media (max-width: 48rem) {
+  .timesheet-form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .timesheet-form-actions {
+    flex-direction: column-reverse;
+  }
+
+  .timesheet-form-actions button {
+    width: 100%;
+  }
+}
