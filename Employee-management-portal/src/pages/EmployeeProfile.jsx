@@ -1,14 +1,36 @@
-import { Link, useParams } from "react-router-dom";
+import { useState } from "react";
+import { Link, useNavigate, useParams } from "react-router-dom";
+
 import ArrowBackOutlined from "@mui/icons-material/ArrowBackOutlined";
 import useEmployee from "../hooks/useEmployee";
 import ActionButton from "../components/ActionButton";
-
+import ConfirmDialouge from "../components/ConfirmDialouge";
+import { deleteStoredEmployee } from "../utils/employeeStorage";
 import "../styles/EmployeeProfile.css";
 
 const EmployeeProfile = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
 
   const { employee, loading, error } = useEmployee(id);
+
+  const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
+  const [deleting, setDeleting] = useState(false);
+
+  const handleDelete = () => {
+    try {
+      setDeleting(true);
+
+      deleteStoredEmployee(employee.id);
+
+      navigate("/employees");
+    } catch (error) {
+      console.error("Failed to delete employee:", error);
+    } finally {
+      setDeleting(false);
+      setDeleteDialogOpen(false);
+    }
+  };
 
   if (loading) {
     return (
@@ -59,6 +81,7 @@ const EmployeeProfile = () => {
 
           <span>Employee ID: #{employee.id}</span>
         </div>
+
         <div className="employee-profile-actions">
           <ActionButton
             variant="edit"
@@ -76,6 +99,16 @@ const EmployeeProfile = () => {
         </div>
       </section>
 
+      <ConfirmDialouge
+        open={deleteDialogOpen}
+        title="Delete Employee"
+        message={`Are you sure you want to delete ${fullName}?`}
+        confirmText={deleting ? "Deleting..." : "Delete"}
+        cancelText="Cancel"
+        onConfirm={handleDelete}
+        onCancel={() => setDeleteDialogOpen(false)}
+      />
+
       <section className="employee-profile-card">
         <div className="employee-profile-card-header">
           <h2>Personal Information</h2>
@@ -84,21 +117,25 @@ const EmployeeProfile = () => {
         <div className="employee-profile-grid">
           <div className="employee-profile-field">
             <span>Full Name</span>
+
             <strong>{fullName}</strong>
           </div>
 
           <div className="employee-profile-field">
             <span>Email</span>
+
             <strong>{employee.email}</strong>
           </div>
 
           <div className="employee-profile-field">
             <span>Phone</span>
+
             <strong>{employee.phone}</strong>
           </div>
 
           <div className="employee-profile-field">
             <span>Gender</span>
+
             <strong>{employee.gender || "N/A"}</strong>
           </div>
         </div>
@@ -112,11 +149,13 @@ const EmployeeProfile = () => {
         <div className="employee-profile-grid">
           <div className="employee-profile-field">
             <span>Department</span>
+
             <strong>{employee.company?.department || "N/A"}</strong>
           </div>
 
           <div className="employee-profile-field">
             <span>Title</span>
+
             <strong>{employee.company?.title || "N/A"}</strong>
           </div>
         </div>

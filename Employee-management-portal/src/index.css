@@ -30,6 +30,7 @@
   --radius-xl: 1rem;
 
   --stat-box-shadow: rgba(15, 23, 42, 0.08);
+  --input-box-shadow: rgba(37, 99, 235, 0.1);
 }
 
 * {

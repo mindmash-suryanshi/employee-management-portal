@@ -30,3 +30,5 @@ export const timesheetData = [
     status: "Submitted",
   },
 ];
+
+export default timesheetData;

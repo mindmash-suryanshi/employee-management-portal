@@ -1,0 +1,171 @@
+.edit-employee-page {
+  width: 100%;
+  animation: editEmployeeFadeIn 0.4s ease-out;
+}
+
+.edit-employee-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  margin-bottom: 1.5rem;
+  color: var(--color-text-secondary);
+  font-size: 0.875rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.edit-employee-back:hover {
+  color: var(--color-primary);
+}
+
+.edit-employee-back svg {
+  font-size: 1.125rem;
+}
+
+.edit-employee-header {
+  margin-bottom: 1.5rem;
+}
+
+.edit-employee-header h1 {
+  margin: 0;
+  color: var(--color-text-primary);
+  font-size: 1.75rem;
+  font-weight: 700;
+}
+
+.edit-employee-header p {
+  margin: 0.375rem 0 0;
+  color: var(--color-text-secondary);
+  font-size: 0.875rem;
+}
+
+.edit-employee-header strong {
+  color: var(--color-text-primary);
+  font-weight: 500;
+}
+
+.edit-employee-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.edit-employee-section {
+  padding: 1.5rem;
+  background-color: var(--color-white);
+  border: 0.0625rem solid var(--color-border);
+  border-radius: 0.75rem;
+}
+
+.edit-employee-section h2 {
+  margin: 0 0 1.25rem;
+  color: var(--color-text-primary);
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.edit-employee-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.25rem 1.5rem;
+}
+
+.edit-employee-actions {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 0.625rem;
+  margin-top: 0.25rem;
+}
+
+.edit-employee-cancel,
+.edit-employee-save {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 6.5rem;
+  padding: 0.625rem 1rem;
+  border-radius: 0.4375rem;
+  font-family: inherit;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.edit-employee-cancel {
+  border: 0.0625rem solid var(--color-border);
+  background-color: var(--color-white);
+  color: var(--color-text-secondary);
+}
+
+.edit-employee-cancel:hover {
+  background-color: var(--color-background);
+  color: var(--color-text-primary);
+}
+
+.edit-employee-save {
+  border: 0.0625rem solid var(--color-primary);
+  background-color: var(--color-primary);
+  color: var(--color-white);
+}
+
+.edit-employee-save:hover:not(:disabled) {
+  transform: translateY(-0.0625rem);
+}
+
+.edit-employee-save:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.edit-employee-error {
+  margin: 0 0 1rem;
+  padding: 0.75rem 1rem;
+  border: 0.0625rem solid var(--color-danger-secondary);
+  border-radius: 0.4375rem;
+  background-color: var(--color-background);
+  color: var(--color-danger);
+  font-size: 0.8125rem;
+}
+
+@keyframes editEmployeeFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(0.5rem);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 700px) {
+  .edit-employee-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .edit-employee-section {
+    padding: 1.25rem;
+  }
+
+  .edit-employee-actions {
+    justify-content: stretch;
+  }
+
+  .edit-employee-cancel,
+  .edit-employee-save {
+    flex: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .edit-employee-page {
+    animation: none;
+  }
+}
