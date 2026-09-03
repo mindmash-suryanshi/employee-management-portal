@@ -1,0 +1,58 @@
+const timesheets = [
+  {
+    id: 1,
+    employeeId: 1,
+    employeeName: "Emily Johnson",
+    date: "2026-09-01",
+    hours: 8,
+    description: "Regular working hours",
+    status: "Pending",
+  },
+  {
+    id: 2,
+    employeeId: 2,
+    employeeName: "Michael Williams",
+    date: "2026-09-01",
+    hours: 7.5,
+    description: "Regular working hours",
+    status: "Approved",
+  },
+  {
+    id: 3,
+    employeeId: 3,
+    employeeName: "Sophia Brown",
+    date: "2026-09-02",
+    hours: 8,
+    description: "Project development",
+    status: "Pending",
+  },
+  {
+    id: 4,
+    employeeId: 4,
+    employeeName: "James Davis",
+    date: "2026-09-02",
+    hours: 6.5,
+    description: "Client meeting and development",
+    status: "Rejected",
+  },
+  {
+    id: 5,
+    employeeId: 5,
+    employeeName: "Emma Miller",
+    date: "2026-09-02",
+    hours: 8,
+    description: "Regular working hours",
+    status: "Approved",
+  },
+  {
+    id: 6,
+    employeeId: 6,
+    employeeName: "Daniel Wilson",
+    date: "2026-09-03",
+    hours: 7,
+    description: "Testing and bug fixing",
+    status: "Pending",
+  },
+];
+
+export default timesheets;

@@ -1,0 +1,23 @@
+.filter-select {
+  min-width: 10rem;
+  padding: 0.65rem 2rem 0.65rem 0.8rem;
+  border: 1px solid #ddd;
+  border-radius: 0.5rem;
+  background: #fff;
+  color: #333;
+  font-size: 0.9rem;
+  cursor: pointer;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.filter-select:focus {
+  border-color: #1976d2;
+  box-shadow: 0 0 0 0.15rem rgba(25, 118, 210, 0.1);
+}
+
+@media (max-width: 48rem) {
+  .filter-select {
+    width: 100%;
+  }
+}
