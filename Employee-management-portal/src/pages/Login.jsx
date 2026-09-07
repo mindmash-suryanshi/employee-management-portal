@@ -25,6 +25,18 @@ const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const itemsPerPage = 5;
+
+  const totalPages = Math.ceil(sortedEmployees.length / itemsPerPage);
+
+  const startIndex = (currentPage - 1) * itemsPerPage;
+
+  const paginatedEmployees = sortedEmployees.slice(
+    startIndex,
+    startIndex + itemsPerPage,
+  );
 
   const navigate = useNavigate();
 
@@ -81,7 +93,6 @@ const Login = () => {
           </div>
         </section>
 
-        {/* Right login section */}
         <section className="login-form-section">
           <div className="login-form-container">
             <div className="portal-branding">

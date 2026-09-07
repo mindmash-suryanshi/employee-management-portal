@@ -7,6 +7,7 @@ const FormField = ({
   value,
   onChange,
   options,
+  error,
 }) => {
   return (
     <div className="form-field">
@@ -29,6 +30,8 @@ const FormField = ({
           onChange={onChange}
         />
       )}
+
+      {error && <span className="form-field-error">{error}</span>}
     </div>
   );
 };

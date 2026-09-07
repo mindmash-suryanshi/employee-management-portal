@@ -10,6 +10,12 @@
   font-size: 0.8125rem;
   font-weight: 500;
 }
+.form-field-error {
+  display: block;
+  margin-top: 0.25rem;
+  color: var(--color-danger);
+  font-size: 0.75rem;
+}
 
 .form-field input,
 .form-field select {
