@@ -1,70 +1,79 @@
-import { CheckCircleOutlined, CancelOutlined } from "@mui/icons-material";
+import "../../styles/TimesheetTable.css";
+const TimesheetTable = ({ timesheets, onView }) => {
+  const rowsPerPage = 5;
 
-const TimesheetTable = ({ timesheets, onApprove, onReject }) => {
+  const emptyRows = Math.max(0, rowsPerPage - timesheets.length);
+
   return (
     <div className="timesheet-table-container">
       <table>
         <thead>
           <tr>
-            <th>TS ID</th>
-            <th>Employee ID</th>
+            <th className="ts-id-column">TS ID</th>
+            <th>Employee</th>
             <th>Week</th>
+            <th>Title</th>
             <th>Status</th>
-            <th>Actions</th>
+            <th className="ts-action-column">Action</th>
           </tr>
         </thead>
 
         <tbody>
           {timesheets.length === 0 ? (
             <tr>
-              <td colSpan="5" className="timesheet-empty">
+              <td colSpan="6" className="timesheet-empty">
                 No timesheets found.
               </td>
             </tr>
           ) : (
-            timesheets.map((timesheet) => (
-              <tr key={timesheet.id}>
-                <td>{timesheet.id}</td>
+            <>
+              {timesheets.map((timesheet) => (
+                <tr key={timesheet.id}>
+                  <td>{timesheet.id}</td>
 
-                <td>{timesheet.employeeId}</td>
+                  <td>{timesheet.employeeName}</td>
 
-                <td>{timesheet.week}</td>
+                  <td>{timesheet.week}</td>
 
-                <td>
-                  <span
-                    className={`timesheet-status status-${timesheet.status.toLowerCase()}`}
-                  >
-                    {timesheet.status}
-                  </span>
-                </td>
+                  <td className="timesheet-title-cell" title={timesheet.title}>
+                    {timesheet.title}
+                  </td>
 
-                <td>
-                  {timesheet.status === "Pending" ? (
-                    <div className="timesheet-actions">
-                      <button
-                        type="button"
-                        className="timesheet-approve"
-                        onClick={() => onApprove(timesheet.id)}
-                      >
-                        <CheckCircleOutlined />
-                        Approve
-                      </button>
+                  <td>
+                    <span
+                      className={`timesheet-status status-${timesheet.status.toLowerCase()}`}
+                    >
+                      {timesheet.status}
+                    </span>
+                  </td>
 
-                      <button
-                        type="button"
-                        className="timesheet-reject"
-                        onClick={() => onReject(timesheet.id)}
-                      >
-                        <CancelOutlined />
-                        Reject
-                      </button>
-                    </div>
-                  ) : (
-                    <span className="timesheet-no-action">—</span>
-                  )}
-                </td>
-              </tr>
-            ))
+                  <td>
+                    <button
+                      type="button"
+                      className="timesheet-view-button"
+                      onClick={() => onView(timesheet)}
+                    >
+                      View
+                    </button>
+                  </td>
+                </tr>
+              ))}
+
+              {Array.from({ length: emptyRows }, (_, index) => (
+                <tr
+                  key={`empty-${index}`}
+                  className="timesheet-empty-row"
+                  aria-hidden="true"
+                >
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                </tr>
+              ))}
+            </>
           )}
         </tbody>
       </table>
