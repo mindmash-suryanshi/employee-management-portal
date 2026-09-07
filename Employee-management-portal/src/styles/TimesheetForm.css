@@ -6,7 +6,7 @@
   padding: 1.5rem;
   border: 0.0625rem solid var(--color-border);
   border-radius: 0.75rem;
-  background: #fff;
+  background: var(--color-white);
 }
 
 .timesheet-form-section h2 {
@@ -39,14 +39,14 @@
 
 .timesheet-form-cancel {
   border: 0.0625rem solid var(--color-border);
-  background: #fff;
+  background: var(--color-white);
   color: var(--color-text-primary);
 }
 
 .timesheet-form-save {
   border: none;
   background: var(--color-primary);
-  color: #fff;
+  color: var(--color-white);
 }
 
 .timesheet-form-save:hover {

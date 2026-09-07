@@ -6,7 +6,7 @@
   align-items: center;
   justify-content: center;
   padding: 1rem;
-  background: rgba(0, 0, 0, 0.45);
+  background: var(--color-black);
 }
 
 .view-timesheet-modal {
@@ -15,8 +15,8 @@
   overflow-y: auto;
   padding: 1.5rem;
   border-radius: 0.75rem;
-  background: #fff;
-  box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.2);
+  background: var(--color-white);
+  box-shadow: 0 1rem 3rem var(--color-black);
 }
 
 .view-timesheet-header {
@@ -112,7 +112,7 @@
 
 .timesheet-done-button {
   background: var(--color-primary);
-  color: #fff;
+  color: var(--color-white) l;
 }
 
 .timesheet-done-button:hover {
@@ -120,13 +120,13 @@
 }
 
 .view-timesheet-actions .timesheet-approve {
-  background: #dcfce7;
-  color: #166534;
+  background: var(--color-success-secondary);
+  color: var(--color-success);
 }
 
 .view-timesheet-actions .timesheet-reject {
-  background: #fee2e2;
-  color: #991b1b;
+  background: var(--color-danger-secondary);
+  color: var(--color-danger);
 }
 
 @media (max-width: 48rem) {

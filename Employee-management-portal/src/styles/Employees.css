@@ -19,7 +19,7 @@
   border: none;
   border-radius: 0.5rem;
   background: var(--color-primary);
-  color: #fff;
+  color: var(--color-white);
   font-size: 0.875rem;
   font-weight: 600;
   text-decoration: none;
@@ -29,7 +29,7 @@
 }
 
 .add-employee-button:hover {
-  background: #1d4ed8;
+  background: var(--color-primary-dark);
   transform: translateY(-0.0625rem);
 }
 
@@ -75,8 +75,8 @@
   width: 100%;
   border: 0.0625rem solid var(--color-border);
   border-radius: 0.75rem !important;
-  background: #fff;
-  box-shadow: 0 0.125rem 0.5rem rgba(0, 0, 0, 0.03) !important;
+  background: var(--color-white);
+  box-shadow: 0 0.125rem 0.5rem var(--color-border) !important;
   overflow: hidden;
   margin: 1rem 0;
 }
@@ -164,8 +164,6 @@
   white-space: nowrap;
 }
 
-/* Table Action Button */
-
 .employee-table-container .MuiButton-root {
   min-width: 7.5rem;
   padding: 0.5rem 0.875rem;
@@ -176,13 +174,11 @@
   white-space: nowrap;
 }
 
-/* Employee Stat Cards */
-
 .employee-stat-cards .stat-card {
   min-height: 5.5rem;
   border: 0.0625rem solid var(--color-border);
   border-radius: 0.75rem !important;
-  background: #fff;
+  background: var(--color-white);
   box-shadow: none !important;
   transition:
     transform 0.2s ease,
@@ -191,7 +187,7 @@
 
 .employee-stat-cards .stat-card:hover {
   transform: translateY(-0.125rem);
-  box-shadow: 0 0.5rem 1.25rem rgba(15, 23, 42, 0.08) !important;
+  box-shadow: 0 0.5rem 1.25rem var(--color-black) !important;
 }
 
 .employee-stat-cards .stat-card .MuiCardContent-root {
@@ -239,7 +235,7 @@
   padding: 0 1.125rem;
   border-radius: 0.5rem;
   background: var(--color-primary);
-  color: #fff;
+  color: var(--color-white);
   font-size: 0.875rem;
   font-weight: 600;
   text-decoration: none;
@@ -249,22 +245,22 @@
 }
 
 .add-employee-button:hover {
-  background: #1d4ed8;
+  background: var(--color-primary-dark);
   transform: translateY(-0.0625rem);
 }
 .employee-stat-cards .stat-card-icon-primary {
-  background: #dbeafe;
-  color: #2563eb;
+  background: var(--color-neutral);
+  color: var(--color-primary);
 }
 
 .employee-stat-cards .stat-card-icon-secondary {
-  background: #dbeafe;
-  color: #3b82f6;
+  background: var(--color-neutral);
+  color: var(--color-secondary);
 }
 
 .employee-stat-cards .stat-card-icon-success {
-  background: #dcfce7;
-  color: #22c55e;
+  background: var(--color-success-secondary);
+  color: var(--color-success);
 }
 
 .employee-pagination {
@@ -281,8 +277,8 @@
   padding: 0 0.75rem;
   border: 0.0625rem solid var(--color-border);
   border-radius: 0.375rem;
-  background: #fff;
-  color: #475569;
+  background: var(--color-white);
+  color: var(--color-neutral-dark);
   font-size: 0.8125rem;
   font-weight: 500;
   cursor: pointer;
@@ -294,19 +290,19 @@
 
 .employee-pagination button:hover:not(:disabled) {
   border-color: var(--color-primary);
-  background: #eff6ff;
+  background: var(--color-background-secondary);
   color: var(--color-primary);
 }
 
 .employee-pagination button.active {
   border-color: var(--color-primary);
   background: var(--color-primary);
-  color: #fff;
+  color: var(--color-white);
 }
 
 .employee-pagination button:disabled {
-  background: #f8fafc;
-  color: #cbd5e1;
+  background: var(--color-background);
+  color: var(--color-border-secondary);
   cursor: not-allowed;
 }
 

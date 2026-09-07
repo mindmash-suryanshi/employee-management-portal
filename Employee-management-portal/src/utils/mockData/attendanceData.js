@@ -1,182 +1,83 @@
-export const attendanceData = [
-  {
-    id: 1,
-    employeeId: 1,
-    status: "Present",
-    date: "2026-08-31",
-  },
-  {
-    id: 2,
-    employeeId: 2,
-    status: "Present",
-    date: "2026-08-31",
-  },
-  {
-    id: 3,
-    employeeId: 3,
-    status: "Present",
-    date: "2026-08-31",
-  },
-  {
-    id: 4,
-    employeeId: 4,
-    status: "Present",
-    date: "2026-08-31",
-  },
-  {
-    id: 5,
-    employeeId: 5,
-    status: "Present",
-    date: "2026-08-31",
-  },
-  {
-    id: 6,
-    employeeId: 6,
-    status: "Present",
-    date: "2026-08-31",
-  },
-  {
-    id: 7,
-    employeeId: 7,
-    status: "Present",
-    date: "2026-08-31",
-  },
-  {
-    id: 8,
-    employeeId: 8,
-    status: "Present",
-    date: "2026-08-31",
-  },
-  {
-    id: 9,
-    employeeId: 9,
-    status: "Present",
-    date: "2026-08-31",
-  },
-  {
-    id: 10,
-    employeeId: 10,
-    status: "Present",
-    date: "2026-08-31",
-  },
-  {
-    id: 11,
-    employeeId: 11,
-    status: "Present",
-    date: "2026-08-31",
-  },
-  {
-    id: 12,
-    employeeId: 12,
-    status: "Present",
-    date: "2026-08-31",
-  },
-  {
-    id: 13,
-    employeeId: 13,
-    status: "Present",
-    date: "2026-08-31",
-  },
-  {
-    id: 14,
-    employeeId: 14,
-    status: "Present",
-    date: "2026-08-31",
-  },
-  {
-    id: 15,
-    employeeId: 15,
-    status: "Present",
-    date: "2026-08-31",
-  },
-  {
-    id: 16,
-    employeeId: 16,
-    status: "Present",
-    date: "2026-08-31",
-  },
-  {
-    id: 17,
-    employeeId: 17,
-    status: "Present",
-    date: "2026-08-31",
-  },
-  {
-    id: 18,
-    employeeId: 18,
-    status: "Present",
-    date: "2026-08-31",
-  },
-  {
-    id: 19,
-    employeeId: 19,
-    status: "Present",
-    date: "2026-08-31",
-  },
-  {
-    id: 20,
-    employeeId: 20,
-    status: "Present",
-    date: "2026-08-31",
-  },
-  {
-    id: 21,
-    employeeId: 21,
-    status: "Present",
-    date: "2026-08-31",
-  },
-  {
-    id: 22,
-    employeeId: 22,
-    status: "Present",
-    date: "2026-08-31",
-  },
-  {
-    id: 23,
-    employeeId: 23,
-    status: "Present",
-    date: "2026-08-31",
-  },
-  {
-    id: 24,
-    employeeId: 24,
-    status: "Present",
-    date: "2026-08-31",
-  },
-  {
-    id: 25,
-    employeeId: 25,
-    status: "Absent",
-    date: "2026-08-31",
-  },
-  {
-    id: 26,
-    employeeId: 26,
-    status: "Absent",
-    date: "2026-08-31",
-  },
-  {
-    id: 27,
-    employeeId: 27,
-    status: "Absent",
-    date: "2026-08-31",
-  },
-  {
-    id: 28,
-    employeeId: 28,
-    status: "Absent",
-    date: "2026-08-31",
-  },
-  {
-    id: 29,
-    employeeId: 29,
-    status: "Absent",
-    date: "2026-08-31",
-  },
-  {
-    id: 30,
-    employeeId: 30,
-    status: "Absent",
-    date: "2026-08-31",
-  },
-];
+const employees = Array.from({ length: 30 }, (_, index) => index + 1);
+
+const startDate = new Date("2026-08-01");
+const endDate = new Date("2026-09-07");
+
+const getDateString = (date) => {
+  return date.toISOString().split("T")[0];
+};
+
+const getCheckInTime = (employeeId, day) => {
+  const variations = [
+    "08:52",
+    "08:57",
+    "09:00",
+    "09:03",
+    "09:07",
+    "09:11",
+    "09:15",
+    "09:20",
+    "09:25",
+  ];
+
+  return variations[(employeeId + day) % variations.length];
+};
+
+const getCheckOutTime = (employeeId, day) => {
+  const variations = [
+    "17:05",
+    "17:10",
+    "17:15",
+    "17:20",
+    "17:25",
+    "17:30",
+    "17:35",
+    "17:40",
+  ];
+
+  return variations[(employeeId * 2 + day) % variations.length];
+};
+
+const isAbsent = (employeeId, day) => {
+  return (employeeId + day) % 17 === 0 || (employeeId * day) % 43 === 0;
+};
+
+const generateAttendance = () => {
+  const records = [];
+  let id = 1;
+
+  for (
+    let date = new Date(startDate);
+    date <= endDate;
+    date.setDate(date.getDate() + 1)
+  ) {
+    const dayOfWeek = date.getDay();
+
+    // Skip Saturday and Sunday
+    if (dayOfWeek === 0 || dayOfWeek === 6) {
+      continue;
+    }
+
+    const dateString = getDateString(date);
+    const day = date.getDate();
+
+    employees.forEach((employeeId) => {
+      const absent = isAbsent(employeeId, day);
+
+      records.push({
+        id,
+        employeeId,
+        status: absent ? "Absent" : "Present",
+        date: dateString,
+        checkIn: absent ? null : getCheckInTime(employeeId, day),
+        checkOut: absent ? null : getCheckOutTime(employeeId, day),
+      });
+
+      id += 1;
+    });
+  }
+
+  return records;
+};
+
+export const attendanceData = generateAttendance();
