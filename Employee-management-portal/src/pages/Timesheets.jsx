@@ -1,7 +1,16 @@
 import { useState } from "react";
 
 import useTimesheets from "../hooks/useTimesheets";
+import useEmployees from "../hooks/useEmployees";
+
 import TimesheetTable from "../components/Timesheets/TimesheetTable";
+import AddTimesheet from "./AddTimesheet";
+import ViewTimesheet from "./ViewTimesheet";
+
+import {
+  updateTimesheetStatus,
+  addTimesheet,
+} from "../utils/timesheetsStorage";
 
 import {
   AccessTimeOutlined,
@@ -11,11 +20,33 @@ import {
 } from "@mui/icons-material";
 
 import "../styles/Timesheet.css";
+import "../styles/AddTimesheet.css";
+import "../styles/ViewTimesheet.css";
 
 const Timesheets = () => {
-  const { timesheets, loading, error } = useTimesheets();
+  const { timesheets, setTimesheets, loading, error } = useTimesheets();
+
+  const { employees, loading: employeesLoading } = useEmployees();
 
   const [selectedStatus, setSelectedStatus] = useState("All");
+
+  const [showAdd, setShowAdd] = useState(false);
+  const [selectedTimesheet, setSelectedTimesheet] = useState(null);
+
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const [formData, setFormData] = useState({
+    employeeId: "",
+    week: "",
+    title: "",
+    task: "",
+    startTime: "",
+    endTime: "",
+  });
+
+  const [saving, setSaving] = useState(false);
+
+  const itemsPerPage = 5;
 
   const totalTimesheets = timesheets.length;
 
@@ -36,15 +67,133 @@ const Timesheets = () => {
       ? timesheets
       : timesheets.filter((timesheet) => timesheet.status === selectedStatus);
 
+  const totalPages = Math.ceil(filteredTimesheets.length / itemsPerPage);
+
+  const startIndex = (currentPage - 1) * itemsPerPage;
+
+  const paginatedTimesheets = filteredTimesheets.slice(
+    startIndex,
+    startIndex + itemsPerPage,
+  );
+
+  const handleStatusFilter = (event) => {
+    setSelectedStatus(event.target.value);
+    setCurrentPage(1);
+  };
+
   const handleApprove = (timesheetId) => {
-    console.log("Approve timesheet:", timesheetId);
+    const updatedTimesheets = updateTimesheetStatus(timesheetId, "Approved");
+
+    setTimesheets(updatedTimesheets);
+
+    setSelectedTimesheet(
+      updatedTimesheets.find((timesheet) => timesheet.id === timesheetId),
+    );
   };
 
   const handleReject = (timesheetId) => {
-    console.log("Reject timesheet:", timesheetId);
+    const updatedTimesheets = updateTimesheetStatus(timesheetId, "Rejected");
+
+    setTimesheets(updatedTimesheets);
+
+    setSelectedTimesheet(
+      updatedTimesheets.find((timesheet) => timesheet.id === timesheetId),
+    );
   };
 
-  if (loading) {
+  const handleFormChange = (event) => {
+    const { name, value } = event.target;
+
+    setFormData((previousData) => ({
+      ...previousData,
+      [name]: value,
+    }));
+  };
+
+  const handleAddTimesheet = (event) => {
+    event.preventDefault();
+
+    const selectedEmployee = employees.find(
+      (employee) => employee.id === Number(formData.employeeId),
+    );
+
+    if (
+      !selectedEmployee ||
+      !formData.week ||
+      !formData.title ||
+      !formData.task ||
+      !formData.startTime ||
+      !formData.endTime
+    ) {
+      return;
+    }
+
+    const [startHour, startMinute] = formData.startTime.split(":").map(Number);
+
+    const [endHour, endMinute] = formData.endTime.split(":").map(Number);
+
+    const start = startHour * 60 + startMinute;
+
+    const end = endHour * 60 + endMinute;
+
+    const totalHours =
+      end > start ? Number(((end - start) / 60).toFixed(2)) : 0;
+
+    if (totalHours <= 0) {
+      return;
+    }
+
+    setSaving(true);
+
+    const newTimesheet = {
+      employeeId: selectedEmployee.id,
+      employeeName: `${selectedEmployee.firstName} ${selectedEmployee.lastName}`,
+      week: formData.week,
+      title: formData.title,
+      task: formData.task,
+      startTime: formData.startTime,
+      endTime: formData.endTime,
+      totalHours,
+      status: "Pending",
+    };
+
+    const updatedTimesheets = addTimesheet(newTimesheet);
+
+    setTimesheets(updatedTimesheets);
+
+    setFormData({
+      employeeId: "",
+      week: "",
+      title: "",
+      task: "",
+      startTime: "",
+      endTime: "",
+    });
+
+    setSaving(false);
+    setShowAdd(false);
+
+    setCurrentPage(Math.ceil(updatedTimesheets.length / itemsPerPage));
+  };
+
+  const handleCancelAdd = () => {
+    setFormData({
+      employeeId: "",
+      week: "",
+      title: "",
+      task: "",
+      startTime: "",
+      endTime: "",
+    });
+
+    setShowAdd(false);
+  };
+
+  const handleDoneView = () => {
+    setSelectedTimesheet(null);
+  };
+
+  if (loading || employeesLoading) {
     return (
       <div className="timesheets-page">
         <p>Loading timesheets...</p>
@@ -68,7 +217,11 @@ const Timesheets = () => {
           <p>Manage employee timesheets and approvals.</p>
         </div>
 
-        <button type="button" className="add-timesheet-button">
+        <button
+          type="button"
+          className="add-timesheet-button"
+          onClick={() => setShowAdd(true)}
+        >
           <AccessTimeOutlined />
           Add Timesheet
         </button>
@@ -128,7 +281,7 @@ const Timesheets = () => {
 
         <select
           value={selectedStatus}
-          onChange={(event) => setSelectedStatus(event.target.value)}
+          onChange={handleStatusFilter}
           className="timesheet-status-filter"
         >
           <option value="All">All Status</option>
@@ -139,10 +292,62 @@ const Timesheets = () => {
       </div>
 
       <TimesheetTable
-        timesheets={filteredTimesheets}
-        onApprove={handleApprove}
-        onReject={handleReject}
+        timesheets={paginatedTimesheets}
+        onView={setSelectedTimesheet}
       />
+
+      {totalPages > 1 && (
+        <div className="timesheet-pagination">
+          <button
+            type="button"
+            disabled={currentPage === 1}
+            onClick={() => setCurrentPage(currentPage - 1)}
+          >
+            Previous
+          </button>
+
+          {Array.from({ length: totalPages }, (_, index) => index + 1).map(
+            (page) => (
+              <button
+                type="button"
+                key={page}
+                className={currentPage === page ? "active" : ""}
+                onClick={() => setCurrentPage(page)}
+              >
+                {page}
+              </button>
+            ),
+          )}
+
+          <button
+            type="button"
+            disabled={currentPage === totalPages}
+            onClick={() => setCurrentPage(currentPage + 1)}
+          >
+            Next
+          </button>
+        </div>
+      )}
+
+      {showAdd && (
+        <AddTimesheet
+          formData={formData}
+          employees={employees}
+          onChange={handleFormChange}
+          onSubmit={handleAddTimesheet}
+          onCancel={handleCancelAdd}
+          saving={saving}
+        />
+      )}
+
+      {selectedTimesheet && (
+        <ViewTimesheet
+          timesheet={selectedTimesheet}
+          onApprove={handleApprove}
+          onReject={handleReject}
+          onDone={handleDoneView}
+        />
+      )}
     </div>
   );
 };

@@ -1,5 +1,10 @@
 import { useEffect, useState } from "react";
+
 import { fetchTimesheets } from "../services/timesheetService";
+import {
+  getStoredTimesheets,
+  saveTimesheets,
+} from "../utils/timesheetsStorage";
 
 const useTimesheets = () => {
   const [timesheets, setTimesheets] = useState([]);
@@ -9,8 +14,16 @@ const useTimesheets = () => {
   useEffect(() => {
     const loadTimesheets = async () => {
       try {
+        const storedTimesheets = getStoredTimesheets();
+
+        if (storedTimesheets) {
+          setTimesheets(storedTimesheets);
+          return;
+        }
+
         const data = await fetchTimesheets();
 
+        saveTimesheets(data);
         setTimesheets(data);
       } catch (error) {
         setError("Failed to fetch timesheets.");
@@ -24,6 +37,7 @@ const useTimesheets = () => {
 
   return {
     timesheets,
+    setTimesheets,
     loading,
     error,
   };
