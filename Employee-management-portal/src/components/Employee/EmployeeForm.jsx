@@ -1,6 +1,14 @@
 import FormField from "../FormField";
 
-const EmployeeForm = ({ formData, onChange, onSubmit, onCancel, saving }) => {
+const EmployeeForm = ({
+  formData,
+  errors = {},
+  onChange,
+  onSubmit,
+  onCancel,
+  saving,
+  submitText = "Save",
+}) => {
   return (
     <form className="edit-employee-form" onSubmit={onSubmit}>
       <div className="edit-employee-section">
@@ -12,6 +20,7 @@ const EmployeeForm = ({ formData, onChange, onSubmit, onCancel, saving }) => {
             name="firstName"
             value={formData.firstName}
             onChange={onChange}
+            error={errors.firstName}
           />
 
           <FormField
@@ -19,6 +28,7 @@ const EmployeeForm = ({ formData, onChange, onSubmit, onCancel, saving }) => {
             name="lastName"
             value={formData.lastName}
             onChange={onChange}
+            error={errors.lastName}
           />
 
           <FormField
@@ -27,6 +37,7 @@ const EmployeeForm = ({ formData, onChange, onSubmit, onCancel, saving }) => {
             type="email"
             value={formData.email}
             onChange={onChange}
+            error={errors.email}
           />
 
           <FormField
@@ -35,6 +46,7 @@ const EmployeeForm = ({ formData, onChange, onSubmit, onCancel, saving }) => {
             type="tel"
             value={formData.phone}
             onChange={onChange}
+            error={errors.phone}
           />
 
           <FormField
@@ -49,6 +61,7 @@ const EmployeeForm = ({ formData, onChange, onSubmit, onCancel, saving }) => {
               { value: "Female", label: "Female" },
               { value: "Other", label: "Other" },
             ]}
+            error={errors.gender}
           />
         </div>
       </div>
@@ -62,6 +75,7 @@ const EmployeeForm = ({ formData, onChange, onSubmit, onCancel, saving }) => {
             name="department"
             value={formData.department}
             onChange={onChange}
+            error={errors.department}
           />
 
           <FormField
@@ -69,6 +83,7 @@ const EmployeeForm = ({ formData, onChange, onSubmit, onCancel, saving }) => {
             name="title"
             value={formData.title}
             onChange={onChange}
+            error={errors.title}
           />
         </div>
       </div>
@@ -83,7 +98,7 @@ const EmployeeForm = ({ formData, onChange, onSubmit, onCancel, saving }) => {
         </button>
 
         <button type="submit" className="edit-employee-save" disabled={saving}>
-          {saving ? "Saving..." : "Save"}
+          {saving ? "Saving..." : submitText}
         </button>
       </div>
     </form>
