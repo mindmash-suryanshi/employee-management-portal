@@ -8,6 +8,7 @@ import Timesheets from "../pages/Timesheets";
 import ProtectedRoute from "./ProtectedRoute";
 import MainLayout from "../components/MainLayout/MainLayout";
 import AddEmployee from "../pages/AddEmployee";
+import Attendance from "../pages/Attendance";
 
 const AppRoutes = () => {
   return (
@@ -21,6 +22,7 @@ const AppRoutes = () => {
           <Route path="/employees/:id" element={<EmployeeProfile />} />
           <Route path="/edit-employee/:id" element={<EditEmployee />} />
           <Route path="/add-employee" element={<AddEmployee />} />
+          <Route path="/attendance" element={<Attendance />} />
           <Route path="/timesheets" element={<Timesheets />} />
         </Route>
       </Route>
