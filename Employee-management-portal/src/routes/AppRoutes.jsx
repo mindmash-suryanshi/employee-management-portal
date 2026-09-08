@@ -9,6 +9,7 @@ import ProtectedRoute from "./ProtectedRoute";
 import MainLayout from "../components/MainLayout/MainLayout";
 import AddEmployee from "../pages/AddEmployee";
 import Attendance from "../pages/Attendance";
+import Leaves from "../pages/Leaves";
 
 const AppRoutes = () => {
   return (
@@ -23,6 +24,7 @@ const AppRoutes = () => {
           <Route path="/edit-employee/:id" element={<EditEmployee />} />
           <Route path="/add-employee" element={<AddEmployee />} />
           <Route path="/attendance" element={<Attendance />} />
+          <Route path="/leaves" element={<Leaves />} />
           <Route path="/timesheets" element={<Timesheets />} />
         </Route>
       </Route>

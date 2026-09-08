@@ -1,0 +1,94 @@
+/* Upcoming Leaves */
+
+.leave-schedule-card {
+  width: 100%;
+  border: 0.0625rem solid var(--color-border);
+  border-radius: 0.75rem;
+  background: var(--color-white);
+  box-shadow: 0 0.125rem 0.5rem var(--stat-box-shadow);
+  overflow: hidden;
+}
+
+.leave-schedule-header {
+  padding: 1rem 1.25rem;
+  border-bottom: 0.0625rem solid var(--color-border);
+}
+
+.leave-schedule-header h2 {
+  margin: 0;
+  color: var(--color-text-primary);
+  font-size: 0.875rem;
+  font-weight: 700;
+}
+
+.leave-schedule-list {
+  padding: 0 1.25rem;
+}
+
+.leave-schedule-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 5rem;
+  gap: 1rem;
+  border-bottom: 0.0625rem solid var(--color-border);
+}
+
+.leave-schedule-item:last-child {
+  border-bottom: none;
+}
+
+.leave-schedule-info {
+  min-width: 0;
+}
+
+.leave-schedule-info h3 {
+  margin: 0;
+  color: var(--color-text-primary);
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.leave-schedule-info p {
+  margin: 0.375rem 0 0;
+  color: var(--color-text-secondary);
+  font-size: 0.6875rem;
+}
+
+.leave-schedule-employees {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  padding-left: 0.5rem;
+}
+
+.leave-avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  margin-left: -0.375rem;
+  border: 0.125rem solid var(--color-white);
+  border-radius: 50%;
+  background: var(--color-background-secondary);
+  color: var(--color-text-tertiary);
+  font-size: 0.5625rem;
+  font-weight: 700;
+}
+
+.leave-avatar:first-child {
+  margin-left: 0;
+}
+
+.leave-avatar-more {
+  background: var(--color-background-secondary);
+  color: var(--color-primary);
+}
+
+@media (max-width: 48rem) {
+  .leave-schedule-item {
+    align-items: flex-start;
+    padding: 1rem 0;
+  }
+}
