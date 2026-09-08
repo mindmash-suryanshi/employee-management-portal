@@ -54,10 +54,11 @@
   border-radius: 0.625rem;
   background: var(--color-white);
   box-shadow: 0 0.0625rem 0.25rem var(--stat-box-shadow);
+  width: 100%;
 }
 
 .attendance-view-toggle button {
-  min-width: 5.5rem;
+  min-width: 50%;
   height: 2.25rem;
   padding: 0 1rem;
   border: none;

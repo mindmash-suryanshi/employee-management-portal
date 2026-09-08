@@ -44,8 +44,6 @@ const Attendance = () => {
 
   return (
     <div className="attendance-page">
-      <div className="attendance-header"></div>
-
       <div className="attendance-view-toggle-container">
         <div className="attendance-view-toggle">
           <button
