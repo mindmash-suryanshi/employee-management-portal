@@ -1,0 +1,51 @@
+/* Upcoming Holidays */
+
+.upcoming-holidays-card {
+  width: 100%;
+  border: 0.0625rem solid var(--color-border);
+  border-radius: 0.75rem;
+  background: #fff;
+  box-shadow: 0 0.125rem 0.5rem rgba(15, 23, 42, 0.04);
+  overflow: hidden;
+}
+
+.upcoming-holidays-header {
+  padding: 1rem 1.25rem;
+  border-bottom: 0.0625rem solid var(--color-border);
+}
+
+.upcoming-holidays-header h2 {
+  margin: 0;
+  color: var(--color-text-primary);
+  font-size: 0.875rem;
+  font-weight: 700;
+}
+
+.upcoming-holidays-list {
+  padding: 0 1.25rem;
+}
+
+.upcoming-holiday-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 3.5rem;
+  gap: 1rem;
+  border-bottom: 0.0625rem solid #eef2f7;
+}
+
+.upcoming-holiday-item:last-child {
+  border-bottom: none;
+}
+
+.upcoming-holiday-name {
+  color: var(--color-text-primary);
+  font-size: 0.6875rem;
+  font-weight: 600;
+}
+
+.upcoming-holiday-date {
+  color: var(--color-text-secondary);
+  font-size: 0.625rem;
+  white-space: nowrap;
+}
