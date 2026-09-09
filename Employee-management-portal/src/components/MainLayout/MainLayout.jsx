@@ -3,6 +3,7 @@ import "../../styles/MainLayout.css";
 import "../../styles/Sidebar.css";
 import Sidebar from "./Sidebar";
 import Navbar from "./Navbar";
+import PageTransition from "../PageTransition";
 
 const MainLayout = () => {
   return (
@@ -11,7 +12,9 @@ const MainLayout = () => {
       <div className="main-section">
         <Navbar />
         <main className="main-content">
-          <Outlet />
+          <PageTransition>
+            <Outlet />
+          </PageTransition>
         </main>
       </div>
     </div>

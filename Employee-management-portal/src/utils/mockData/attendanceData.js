@@ -1,83 +1,47 @@
-const employees = Array.from({ length: 30 }, (_, index) => index + 1);
+const EMPLOYEE_COUNT = 30;
 
-const startDate = new Date("2026-08-01");
-const endDate = new Date("2026-09-07");
+const START_DATE = new Date("2026-08-01T00:00:00");
+const END_DATE = new Date("2026-09-30T00:00:00");
 
-const getDateString = (date) => {
+const formatDate = (date) => {
   return date.toISOString().split("T")[0];
 };
 
-const getCheckInTime = (employeeId, day) => {
-  const variations = [
-    "08:52",
-    "08:57",
-    "09:00",
-    "09:03",
-    "09:07",
-    "09:11",
-    "09:15",
-    "09:20",
-    "09:25",
-  ];
+const isWeekend = (date) => {
+  const day = date.getDay();
 
-  return variations[(employeeId + day) % variations.length];
+  return day === 0 || day === 6;
 };
 
-const getCheckOutTime = (employeeId, day) => {
-  const variations = [
-    "17:05",
-    "17:10",
-    "17:15",
-    "17:20",
-    "17:25",
-    "17:30",
-    "17:35",
-    "17:40",
-  ];
+const createAttendanceRecord = (employeeId, date) => {
+  const isPresent = employeeId <= 24;
 
-  return variations[(employeeId * 2 + day) % variations.length];
+  return {
+    id: `${formatDate(date)}-${employeeId}`,
+    employeeId,
+    date: formatDate(date),
+    checkIn: isPresent ? "09:00 AM" : null,
+    checkOut: isPresent ? "06:00 PM" : null,
+    status: isPresent ? "Present" : "Absent",
+  };
 };
 
-const isAbsent = (employeeId, day) => {
-  return (employeeId + day) % 17 === 0 || (employeeId * day) % 43 === 0;
-};
-
-const generateAttendance = () => {
+const generateAttendanceData = () => {
   const records = [];
-  let id = 1;
 
-  for (
-    let date = new Date(startDate);
-    date <= endDate;
-    date.setDate(date.getDate() + 1)
-  ) {
-    const dayOfWeek = date.getDay();
+  const currentDate = new Date(START_DATE);
 
-    // Skip Saturday and Sunday
-    if (dayOfWeek === 0 || dayOfWeek === 6) {
-      continue;
+  while (currentDate <= END_DATE) {
+    if (!isWeekend(currentDate)) {
+      for (let employeeId = 1; employeeId <= EMPLOYEE_COUNT; employeeId += 1) {
+        records.push(createAttendanceRecord(employeeId, currentDate));
+      }
     }
 
-    const dateString = getDateString(date);
-    const day = date.getDate();
-
-    employees.forEach((employeeId) => {
-      const absent = isAbsent(employeeId, day);
-
-      records.push({
-        id,
-        employeeId,
-        status: absent ? "Absent" : "Present",
-        date: dateString,
-        checkIn: absent ? null : getCheckInTime(employeeId, day),
-        checkOut: absent ? null : getCheckOutTime(employeeId, day),
-      });
-
-      id += 1;
-    });
+    currentDate.setDate(currentDate.getDate() + 1);
   }
 
   return records;
 };
 
-export const attendanceData = generateAttendance();
+export const attendanceData = generateAttendanceData();

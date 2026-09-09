@@ -1,0 +1,82 @@
+.profile-form-card {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 1.5rem;
+  border: 0.0625rem solid var(--color-border);
+  border-radius: 0.75rem;
+  background: var(--color-white);
+  box-shadow: 0 0.125rem 0.5rem var(--stat-box-shadow);
+}
+
+.profile-form-heading {
+  padding-bottom: 1rem;
+  border-bottom: 0.0625rem solid var(--color-border);
+}
+
+.profile-form-heading h2 {
+  margin: 0;
+  color: var(--color-text-primary);
+  font-size: 0.9375rem;
+  font-weight: 700;
+}
+
+.profile-form-heading p {
+  margin: 0.3rem 0 0;
+  color: var(--color-text-secondary);
+  font-size: 0.6875rem;
+}
+
+.profile-form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.125rem 1rem;
+  padding-top: 1.25rem;
+}
+
+.profile-form .MuiTextField-root {
+  width: 100%;
+}
+
+.profile-form .MuiInputBase-root {
+  font-size: 0.75rem;
+}
+
+.profile-form .MuiInputLabel-root {
+  font-size: 0.75rem;
+}
+
+.profile-form-actions {
+  display: flex;
+  justify-content: flex-end;
+  grid-column: 1 / -1;
+  padding-top: 0.5rem;
+}
+
+.profile-form-actions .MuiButton-root {
+  min-width: 7.5rem;
+  height: 2.375rem;
+  background: var(--color-primary);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  text-transform: none;
+}
+
+.profile-form-actions .MuiButton-root:hover {
+  background: var(--color-primary-dark);
+}
+
+@media (max-width: 48rem) {
+  .profile-form {
+    grid-template-columns: 1fr;
+  }
+
+  .profile-form-actions {
+    grid-column: auto;
+  }
+}
+
+@media (max-width: 30rem) {
+  .profile-form-card {
+    padding: 1rem;
+  }
+}

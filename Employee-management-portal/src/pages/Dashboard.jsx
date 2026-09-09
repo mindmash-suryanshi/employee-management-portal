@@ -1,10 +1,14 @@
 import { useEffect, useState } from "react";
+
 import { fetchEmployees } from "../services/employeeService";
+
 import { attendanceData } from "../utils/mockData/attendanceData";
 import { leaveData } from "../utils/mockData/leaveData";
 import { timesheetData } from "../utils/mockData/timesheetData";
 import { activityData } from "../utils/mockData/activityData";
+
 import RecentActivities from "../components/RecentActivities";
+
 import {
   PeopleOutlined,
   CheckCircleOutlined,
@@ -22,13 +26,21 @@ const Dashboard = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
+  const today = new Date();
+
+  const todayDate = today.toISOString().split("T")[0];
+
   const totalEmployees = employees.length;
 
-  const presentEmployees = attendanceData.filter(
+  const todayAttendance = attendanceData.filter(
+    (record) => record.date === todayDate,
+  );
+
+  const presentEmployees = todayAttendance.filter(
     (record) => record.status === "Present",
   ).length;
 
-  const absentEmployees = attendanceData.filter(
+  const absentEmployees = todayAttendance.filter(
     (record) => record.status === "Absent",
   ).length;
 
@@ -50,6 +62,12 @@ const Dashboard = () => {
       ? ((absentEmployees / totalEmployees) * 100).toFixed(2)
       : 0;
 
+  const formattedDate = today.toLocaleDateString("en-US", {
+    month: "long",
+    day: "numeric",
+    year: "numeric",
+  });
+
   useEffect(() => {
     const loadEmployees = async () => {
       try {
@@ -65,13 +83,6 @@ const Dashboard = () => {
 
     loadEmployees();
   }, []);
-  const today = new Date();
-
-  const formattedDate = today.toLocaleDateString("en-US", {
-    month: "long",
-    day: "numeric",
-    year: "numeric",
-  });
 
   if (loading) {
     return <div>Loading dashboard...</div>;
@@ -138,6 +149,7 @@ const Dashboard = () => {
           to="/timesheets"
         />
       </div>
+
       <div className="dashboard-content">
         <RecentActivities activities={activityData} employees={employees} />
       </div>

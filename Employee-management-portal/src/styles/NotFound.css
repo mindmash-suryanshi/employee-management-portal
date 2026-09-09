@@ -1,0 +1,80 @@
+/* Not Found */
+
+.not-found-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 70vh;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 2rem;
+}
+
+.not-found-content {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  max-width: 28rem;
+  text-align: center;
+}
+
+.not-found-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 4rem;
+  height: 4rem;
+  margin-bottom: 1rem;
+  border-radius: 50%;
+  background: #eff6ff;
+  color: var(--color-primary);
+}
+
+.not-found-icon svg {
+  font-size: 2rem;
+}
+
+.not-found-code {
+  color: var(--color-primary);
+  font-size: 3.5rem;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.not-found-content h1 {
+  margin: 0.75rem 0 0;
+  color: var(--color-text-primary);
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.not-found-content p {
+  margin: 0.5rem 0 1.5rem;
+  color: var(--color-text-secondary);
+  font-size: 0.75rem;
+  line-height: 1.6;
+}
+
+.not-found-button {
+  min-width: 9rem !important;
+  height: 2.375rem !important;
+  background: var(--color-primary) !important;
+  font-size: 0.6875rem !important;
+  font-weight: 600 !important;
+  text-transform: none !important;
+}
+
+.not-found-button:hover {
+  background: #1d4ed8 !important;
+}
+
+@media (max-width: 30rem) {
+  .not-found-page {
+    min-height: 60vh;
+    padding: 1rem;
+  }
+
+  .not-found-code {
+    font-size: 3rem;
+  }
+}

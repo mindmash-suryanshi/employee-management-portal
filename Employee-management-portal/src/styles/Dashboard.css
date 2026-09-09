@@ -1,18 +1,5 @@
 .dashboard-page {
   width: 100%;
-  animation: dashboardFadeIn 0.5s ease-out;
-}
-
-@keyframes dashboardFadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(0.75rem);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
 }
 
 .dashboard-header {
