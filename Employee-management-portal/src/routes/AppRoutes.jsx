@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 
 import Login from "../pages/Login";
 import Dashboard from "../pages/Dashboard";
@@ -22,6 +22,7 @@ const AppRoutes = () => {
 
       <Route element={<ProtectedRoute />}>
         <Route element={<MainLayout />}>
+          <Route path="/" element={<Navigate to="/dashboard" replace />} />
           <Route path="/dashboard" element={<Dashboard />} />
 
           <Route path="/employees" element={<Employees />} />

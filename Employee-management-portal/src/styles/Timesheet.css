@@ -45,9 +45,11 @@
   opacity: 0.9;
 }
 
+/* Stat Cards */
+
 .timesheet-stat-cards {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 1rem;
   margin-bottom: 2rem;
 }
@@ -71,6 +73,7 @@
   border-radius: 0.625rem;
   background: var(--color-background);
   color: var(--color-primary);
+  flex-shrink: 0;
 }
 
 .timesheet-stat-icon svg {
@@ -88,6 +91,8 @@
   color: var(--color-text-primary);
   font-size: 1.35rem;
 }
+
+/* Timesheet List Header */
 
 .timesheets-list-header {
   display: flex;
@@ -125,9 +130,11 @@
   border-color: var(--color-primary);
 }
 
+/* Timesheet Table */
+
 .timesheet-table-container {
   width: 100%;
-  overflow-x: auto;
+  overflow-x: hidden;
   border: 0.0625rem solid var(--color-border);
   border-radius: 0.75rem;
   background: var(--color-white);
@@ -135,12 +142,20 @@
 
 .timesheet-table-container table {
   width: 100%;
-  min-width: 60rem;
   border-collapse: collapse;
+  table-layout: fixed;
 }
 
 .timesheet-table-container thead {
   background: var(--color-background);
+}
+
+.timesheet-table-container th,
+.timesheet-table-container td {
+  box-sizing: border-box;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 .timesheet-table-container th {
@@ -149,7 +164,6 @@
   font-size: 0.8125rem;
   font-weight: 600;
   text-align: left;
-  white-space: nowrap;
 }
 
 .timesheet-table-container td {
@@ -166,6 +180,38 @@
 .timesheet-table-container tbody tr:hover {
   background: var(--color-background);
 }
+
+/* Table Columns */
+
+.timesheet-table-container .ts-id-column {
+  width: 10%;
+}
+
+.timesheet-table-container th:nth-child(2),
+.timesheet-table-container td:nth-child(2) {
+  width: 20%;
+}
+
+.timesheet-table-container th:nth-child(3),
+.timesheet-table-container td:nth-child(3) {
+  width: 15%;
+}
+
+.timesheet-table-container th:nth-child(4),
+.timesheet-table-container td:nth-child(4) {
+  width: 27%;
+}
+
+.timesheet-table-container th:nth-child(5),
+.timesheet-table-container td:nth-child(5) {
+  width: 16%;
+}
+
+.timesheet-table-container .ts-action-column {
+  width: 12%;
+}
+
+/* Status */
 
 .timesheet-status {
   display: inline-flex;
@@ -189,6 +235,8 @@
   background: var(--color-danger-secondary);
   color: var(--color-danger);
 }
+
+/* Actions */
 
 .timesheet-actions {
   display: flex;
@@ -230,10 +278,14 @@
   color: var(--color-text-secondary);
 }
 
+/* Empty State */
+
 .timesheet-empty {
   padding: 2rem !important;
   text-align: center;
 }
+
+/* Reduced Motion */
 
 @media (prefers-reduced-motion: reduce) {
   .timesheets-page,
@@ -246,11 +298,15 @@
   }
 }
 
+/* Tablet */
+
 @media (max-width: 64rem) {
   .timesheet-stat-cards {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
+
+/* Mobile */
 
 @media (max-width: 48rem) {
   .timesheets-header {
@@ -273,5 +329,14 @@
 
   .timesheet-stat-cards {
     grid-template-columns: 1fr;
+  }
+
+  .timesheet-table-container {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .timesheet-table-container table {
+    min-width: 60rem;
   }
 }

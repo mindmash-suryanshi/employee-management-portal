@@ -13,15 +13,26 @@ const isWeekend = (date) => {
   return day === 0 || day === 6;
 };
 
+const getRandomAttendance = () => {
+  return Math.random() < 0.85;
+};
+
+const getRandomTime = (hour, minMinute, maxMinute) => {
+  const minute =
+    Math.floor(Math.random() * (maxMinute - minMinute + 1)) + minMinute;
+
+  return `${String(hour).padStart(2, "0")}:${String(minute).padStart(2, "0")}`;
+};
+
 const createAttendanceRecord = (employeeId, date) => {
-  const isPresent = employeeId <= 24;
+  const isPresent = getRandomAttendance();
 
   return {
     id: `${formatDate(date)}-${employeeId}`,
     employeeId,
     date: formatDate(date),
-    checkIn: isPresent ? "09:00 AM" : null,
-    checkOut: isPresent ? "06:00 PM" : null,
+    checkIn: isPresent ? getRandomTime(9, 0, 25) : null,
+    checkOut: isPresent ? getRandomTime(18, 0, 30) : null,
     status: isPresent ? "Present" : "Absent",
   };
 };

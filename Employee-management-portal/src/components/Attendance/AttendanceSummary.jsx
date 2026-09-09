@@ -7,8 +7,7 @@ import AttendancePagination from "./AttendancePagination";
 const ITEMS_PER_PAGE = 5;
 
 const AttendanceSummary = ({ attendance, employees }) => {
-  const [selectedDate, setSelectedDate] = useState("2026-09-07");
-
+  const [selectedDate, setSelectedDate] = useState("2026-09-09");
   const [searchTerm, setSearchTerm] = useState("");
   const [statusFilter, setStatusFilter] = useState("");
   const [currentPage, setCurrentPage] = useState(1);

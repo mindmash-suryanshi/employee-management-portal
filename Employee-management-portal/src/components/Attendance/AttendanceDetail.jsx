@@ -5,7 +5,7 @@ import AttendancePagination from "./AttendancePagination";
 const ITEMS_PER_PAGE = 5;
 
 const AttendanceDetail = ({ attendance, employees }) => {
-  const [selectedMonth, setSelectedMonth] = useState("2026-08");
+  const [selectedMonth, setSelectedMonth] = useState("2026-09");
 
   const [currentPage, setCurrentPage] = useState(1);
 

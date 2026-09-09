@@ -1,7 +1,18 @@
 import { useState } from "react";
+
 import { Button, TextField } from "@mui/material";
 
 import "../../styles/ProfileForm.css";
+
+const formatDateForInput = (date) => {
+  if (!date) {
+    return "";
+  }
+
+  const [year, month, day] = date.split("-");
+
+  return `${year}-${month.padStart(2, "0")}-${day.padStart(2, "0")}`;
+};
 
 const ProfileForm = ({ user, onUpdate }) => {
   const [formData, setFormData] = useState({
@@ -10,7 +21,7 @@ const ProfileForm = ({ user, onUpdate }) => {
     email: user.email || "",
     username: user.username || "",
     phone: user.phone || "",
-    birthDate: user.birthDate || "",
+    birthDate: formatDateForInput(user.birthDate),
   });
 
   const handleChange = (field, value) => {

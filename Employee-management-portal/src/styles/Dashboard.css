@@ -25,7 +25,7 @@
 
 .dashboard-date {
   padding: 0.75rem 1rem;
-  border: 0.06 rem solid var(--color-border);
+  border: 0.06rem solid var(--color-border);
   border-radius: var(--radius-md);
   background-color: var(--color-white);
   color: var(--color-text-secondary);
@@ -33,7 +33,7 @@
 
 .dashboard-stats {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(5, minmax(0, 1fr));
   gap: 1rem;
   margin-bottom: 1.5rem;
 }
@@ -185,6 +185,16 @@
   background-color: var(--color-warning-secondary) !important;
   color: var(--color-danger) !important;
 }
+
+.activity-table-container {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.activity-table-container .MuiTable-root {
+  min-width: 40rem;
+}
+
 @media (max-width: 50rem) {
   .activity-card {
     overflow-x: auto;
@@ -213,16 +223,52 @@
 
 @media (max-width: 75rem) {
   .dashboard-stats {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 56.25rem) {
+  .dashboard-header {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .dashboard-date {
+    align-self: flex-start;
+  }
+
+  .dashboard-stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
 @media (max-width: 35.6rem) {
-  .dashboard-stats {
-    grid-template-columns: 1fr;
-  }
-
   .dashboard-title {
     font-size: 1.5rem;
+  }
+
+  .dashboard-subtitle {
+    font-size: 0.8125rem;
+  }
+
+  .dashboard-date {
+    padding: 0.625rem 0.875rem;
+    font-size: 0.75rem;
+  }
+
+  .dashboard-stats {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+}
+
+@media (max-width: 30rem) {
+  .dashboard-title {
+    font-size: 1.25rem;
+  }
+
+  .dashboard-subtitle {
+    font-size: 0.75rem;
   }
 }

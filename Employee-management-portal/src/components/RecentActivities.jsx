@@ -60,44 +60,46 @@ const RecentActivities = ({ activities, employees }) => {
           Recent Activities
         </Typography>
 
-        <Table>
-          <TableHead>
-            <TableRow>
-              <TableCell>Activity</TableCell>
-              <TableCell>Employee</TableCell>
-              <TableCell>Time</TableCell>
-              <TableCell>Status</TableCell>
-            </TableRow>
-          </TableHead>
-
-          <TableBody>
-            {activities.map((item) => (
-              <TableRow key={item.id}>
-                <TableCell>
-                  <div className="activity-name">
-                    <div className="activity-icon">
-                      {getActivityIcon(item.activity)}
-                    </div>
-
-                    <span>{item.activity}</span>
-                  </div>
-                </TableCell>
-
-                <TableCell>{getEmployeeName(item.employeeId)}</TableCell>
-
-                <TableCell>{item.time}</TableCell>
-
-                <TableCell>
-                  <Chip
-                    label={item.status}
-                    size="small"
-                    className={`activity-status activity-status-${item.status.toLowerCase()}`}
-                  />
-                </TableCell>
+        <div className="activity-table-container">
+          <Table>
+            <TableHead>
+              <TableRow>
+                <TableCell>Activity</TableCell>
+                <TableCell>Employee</TableCell>
+                <TableCell>Time</TableCell>
+                <TableCell>Status</TableCell>
               </TableRow>
-            ))}
-          </TableBody>
-        </Table>
+            </TableHead>
+
+            <TableBody>
+              {activities.map((item) => (
+                <TableRow key={item.id}>
+                  <TableCell>
+                    <div className="activity-name">
+                      <div className="activity-icon">
+                        {getActivityIcon(item.activity)}
+                      </div>
+
+                      <span>{item.activity}</span>
+                    </div>
+                  </TableCell>
+
+                  <TableCell>{getEmployeeName(item.employeeId)}</TableCell>
+
+                  <TableCell>{item.time}</TableCell>
+
+                  <TableCell>
+                    <Chip
+                      label={item.status}
+                      size="small"
+                      className={`activity-status activity-status-${item.status.toLowerCase()}`}
+                    />
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </div>
       </CardContent>
     </Card>
   );
