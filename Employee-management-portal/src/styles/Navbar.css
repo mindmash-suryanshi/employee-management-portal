@@ -107,6 +107,32 @@
   white-space: nowrap;
 }
 
+.theme-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.theme-toggle:hover {
+  background-color: var(--color-neutral-two);
+  color: var(--color-text-primary);
+}
+
+.theme-toggle svg {
+  font-size: 1.25rem;
+}
+
 .navbar-user-role {
   display: block;
   color: var(--color-text-muted);

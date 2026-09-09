@@ -28,6 +28,7 @@
 
   --color-brand-icon: rgba(255, 255, 255, 0.18);
   --color-navbar-user: #374151;
+  --color-transform: #000;
 
   --search-bar-text: #777;
 
@@ -40,6 +41,50 @@
 
   --stat-box-shadow: rgba(15, 23, 42, 0.08);
   --input-box-shadow: rgba(37, 99, 235, 0.1);
+}
+
+[data-theme="dark"] {
+  --color-primary: #60a5fa;
+  --color-primary-dark: #3b82f6;
+  --color-primary-darker: #2563eb;
+  --color-secondary: #93c5fd;
+
+  --color-success: #4ade80;
+  --color-success-secondary: #14532d;
+
+  --color-danger: #f87171;
+  --color-danger-secondary: #7f1d1d;
+
+  --color-warning: #fbbf24;
+  --color-warning-secondary: #78350f;
+
+  --color-neutral: #1e3a5f;
+  --color-neutral-two: #1e293b;
+  --color-neutral-dark: #94a3b8;
+  --color-transform: #000;
+
+  --color-background: #0f172a;
+  --color-background-secondary: #172554;
+
+  --color-border: #334155;
+  --color-border-secondary: #475569;
+
+  --color-white: #1e293b;
+  --color-black: #ffffff;
+
+  --color-text-primary: #f8fafc;
+  --color-text-tertiary: #cbd5e1;
+  --color-text-secondary: #94a3b8;
+  --color-text-muted: #64748b;
+
+  --color-brand-icon: rgba(255, 255, 255, 0.12);
+  --color-navbar-user: #e2e8f0;
+
+  --search-bar-text: #94a3b8;
+  --table-th: #cbd5e1;
+
+  --stat-box-shadow: rgba(0, 0, 0, 0.2);
+  --input-box-shadow: rgba(96, 165, 250, 0.15);
 }
 
 * {

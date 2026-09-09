@@ -1,28 +1,31 @@
-import { LogoutOutlined } from "@mui/icons-material";
+import {
+  LogoutOutlined,
+  DarkModeOutlined,
+  LightModeOutlined,
+} from "@mui/icons-material";
+import { useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+
 import NotificationMenu from "../NotificationMenu";
 import ConfirmDialouge from "../ConfirmDialouge";
+
 import { getAuthUser, removeAuthUser } from "../../utils/storage";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useTheme } from "../../context/ThemeContext";
 import "../../styles/Navbar.css";
-import { useState } from "react";
 
 const Navbar = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+
   const authUser = getAuthUser();
 
   const fullName = `${authUser?.firstName || ""} ${
     authUser?.lastName || ""
   }`.trim();
 
-  const location = useLocation();
+  const [logoutDialogOpen, setLogoutDialogOpen] = useState(false);
 
-  const handleLogout = () => {
-    removeAuthUser();
-
-    navigate("/login", {
-      replace: true,
-    });
-  };
+  const { theme, toggleTheme } = useTheme();
 
   const pageTitles = {
     "/dashboard": "Dashboard",
@@ -32,8 +35,16 @@ const Navbar = () => {
     "/timesheets": "Timesheets",
     "/profile": "Profile",
   };
-  const [logoutDialogOpen, setLogoutDialogOpen] = useState(false);
+
   const currentPage = pageTitles[location.pathname] || "Employee Portal";
+
+  const handleLogout = () => {
+    removeAuthUser();
+
+    navigate("/login", {
+      replace: true,
+    });
+  };
 
   return (
     <header className="navbar">
@@ -42,6 +53,16 @@ const Navbar = () => {
       </div>
 
       <div className="navbar-actions">
+        <button
+          type="button"
+          className="theme-toggle"
+          aria-label="Toggle theme"
+          title={theme === "light" ? "Dark mode" : "Light mode"}
+          onClick={toggleTheme}
+        >
+          {theme === "light" ? <DarkModeOutlined /> : <LightModeOutlined />}
+        </button>
+
         <NotificationMenu />
 
         <div className="navbar-divider" />
@@ -67,6 +88,7 @@ const Navbar = () => {
         >
           <LogoutOutlined />
         </button>
+
         <ConfirmDialouge
           open={logoutDialogOpen}
           title="Confirm Logout"
