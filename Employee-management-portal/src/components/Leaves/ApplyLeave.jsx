@@ -1,4 +1,6 @@
-import { useState } from "react";
+import useLeaveForm from "../../hooks/useLeaveForm";
+import useLeaveValidation from "../../hooks/useLeaveValidation";
+
 import {
   Dialog,
   DialogTitle,
@@ -6,69 +8,31 @@ import {
   DialogActions,
   Button,
 } from "@mui/material";
-import "../../styles/ApplyLeave.css";
+
 import ConfirmDialouge from "../ConfirmDialouge";
+import "../../styles/ApplyLeave.css";
 
 const ApplyLeave = ({ open, employees, onAddLeave, onClose }) => {
-  const [formData, setFormData] = useState({
-    employeeId: "",
-    leaveType: "Casual Leave",
-    days: "",
-    startDate: "",
-    endDate: "",
-  });
+  const {
+    formData,
+    errors,
+    confirmOpen,
+    today,
+    endDateMax,
+    handleChange,
+    setErrors,
+    setConfirmOpen,
+    resetForm,
+  } = useLeaveForm();
 
-  const [errors, setErrors] = useState({});
-  const [confirmOpen, setConfirmOpen] = useState(false);
-
+  const { validate } = useLeaveValidation(formData);
   const leaveTypes = ["Casual Leave", "Sick Leave", "Annual Leave"];
-
-  const handleChange = (field, value) => {
-    setFormData((current) => ({
-      ...current,
-      [field]: value,
-    }));
-
-    setErrors((current) => ({
-      ...current,
-      [field]: "",
-    }));
-  };
-
-  const validate = () => {
-    const newErrors = {};
-
-    if (!formData.employeeId) {
-      newErrors.employeeId = "Select an employee.";
-    }
-
-    if (!formData.days || Number(formData.days) < 1) {
-      newErrors.days = "Enter valid days.";
-    }
-
-    if (!formData.startDate) {
-      newErrors.startDate = "Select start date.";
-    }
-
-    if (!formData.endDate) {
-      newErrors.endDate = "Select end date.";
-    }
-
-    if (
-      formData.startDate &&
-      formData.endDate &&
-      formData.endDate < formData.startDate
-    ) {
-      newErrors.endDate = "End date must be after start date.";
-    }
-
-    setErrors(newErrors);
-
-    return Object.keys(newErrors).length === 0;
-  };
-
   const handleApply = () => {
-    if (!validate()) {
+    const validationErrors = validate();
+
+    setErrors(validationErrors);
+
+    if (Object.keys(validationErrors).length > 0) {
       return;
     }
 
@@ -88,21 +52,13 @@ const ApplyLeave = ({ open, employees, onAddLeave, onClose }) => {
     };
 
     onAddLeave(newLeave);
-
     setConfirmOpen(false);
-    handleClose();
+    resetForm();
+    onClose();
   };
 
   const handleClose = () => {
-    setFormData({
-      employeeId: "",
-      leaveType: "Casual Leave",
-      days: "",
-      startDate: "",
-      endDate: "",
-    });
-
-    setErrors({});
+    resetForm();
     onClose();
   };
 
@@ -121,9 +77,10 @@ const ApplyLeave = ({ open, employees, onAddLeave, onClose }) => {
 
         <DialogContent>
           <div className="apply-leave-form">
-            <label>Select Employee</label>
+            <label htmlFor="employee">Select Employee</label>
 
             <select
+              id="employee"
               value={formData.employeeId}
               onChange={(event) =>
                 handleChange("employeeId", event.target.value)
@@ -157,9 +114,10 @@ const ApplyLeave = ({ open, employees, onAddLeave, onClose }) => {
               ))}
             </div>
 
-            <label>Number of Days</label>
+            <label htmlFor="days">Number of Days</label>
 
             <input
+              id="days"
               type="number"
               min="1"
               value={formData.days}
@@ -173,10 +131,12 @@ const ApplyLeave = ({ open, employees, onAddLeave, onClose }) => {
 
             <div className="leave-date-grid">
               <div>
-                <label>Leave From</label>
+                <label htmlFor="startDate">Leave From</label>
 
                 <input
+                  id="startDate"
                   type="date"
+                  min={today}
                   value={formData.startDate}
                   onChange={(event) =>
                     handleChange("startDate", event.target.value)
@@ -189,10 +149,13 @@ const ApplyLeave = ({ open, employees, onAddLeave, onClose }) => {
               </div>
 
               <div>
-                <label>Leave To</label>
+                <label htmlFor="endDate">Leave To</label>
 
                 <input
+                  id="endDate"
                   type="date"
+                  min={formData.startDate || today}
+                  max={endDateMax}
                   value={formData.endDate}
                   onChange={(event) =>
                     handleChange("endDate", event.target.value)
